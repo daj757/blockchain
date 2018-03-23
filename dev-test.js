@@ -1,10 +1,14 @@
-const Blockchain = require("./blockchain");
+const Wallet = require("./wallet");
+const wallet = new Wallet();
+console.log(wallet.toString());
 
-const bc = new Blockchain();
+// const Blockchain = require("./blockchain");
 
-for (var i = 0; i < 10; i++) {
-  console.log(bc.addBlock(`foo${i}`).toString());
-}
+// const bc = new Blockchain();
+
+// for (var i = 0; i < 10; i++) {
+//   console.log(bc.addBlock(`foo${i}`).toString());
+// }
 // const block = new Block("foo", "var", "zoo", "baz");
 // console.log(Block.genesis().toString());
 // console.log(block.toString());

@@ -3,10 +3,14 @@ const bodyParser = require("body-parser");
 const Blockchain = require("../blockchain/index");
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
 const P2pServer = require("./p2p-server");
+const Wallet = require("../wallet");
+const TransactionPool = require("../wallet/transaction-pool");
 
 const app = express();
 const bc = new Blockchain();
 const p2pServer = new P2pServer(bc);
+const wallet = new Wallet();
+const tp = new TransactionPool();
 
 app.use(bodyParser.json());
 
