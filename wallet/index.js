@@ -2,6 +2,7 @@ const { INITIAL_BALANCE } = require("../config");
 const ChainUtil = require("../chain-util");
 const Transaction = require("./transaction");
 const TransactionPool = require("./transaction-pool");
+const Miner = require("../app/miner");
 
 class Wallet {
   constructor() {
@@ -35,6 +36,12 @@ class Wallet {
       transactionPool.updateOrAddTransaction(transaction);
     }
     return transaction;
+  }
+
+  static blockchainWallet() {
+    const blockchainWallet = new this();
+    blockchainWallet.address = "blockchain-wallet";
+    return blockchainWallet;
   }
 }
 
