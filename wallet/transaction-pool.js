@@ -1,4 +1,5 @@
 const Transaction = require("../wallet/transaction");
+const Blockchain = require("../blockchain");
 
 class TransactionPool {
   constructor() {
