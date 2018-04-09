@@ -67,5 +67,35 @@ describe("wallet test", () => {
         INITIAL_BALANCE - addBalance * repeatAdd
       );
     });
+
+    describe("recipient conducts a transaction", () => {
+      let subtractBalance, recipientBalance;
+
+      beforeEach(() => {
+        tp.clear();
+        subtractBalance = 60;
+        recipientBalance = wallet.calculateBalance(bc);
+        wallet.createTransaction(
+          senderWallet.publicKey,
+          subtractBalance,
+          bc,
+          tp
+        );
+        bc.addBlock(tp.transactions);
+      });
+
+      describe("and the sender sends another transaction to the recipient", () => {
+        beforeEach(() => {
+          tp.clear();
+          senderWallet.createTransaction(wallet.publicKey, addBalance, bc, tp);
+          bc.addBlock(tp.transactions);
+        });
+        it("calculates the recipient balance using only existing transactions since most recent", () => {
+          expect(wallet.calculateBalance(bc)).toEqual(
+            recipientBalance - subtractBalance + addBalance
+          );
+        });
+      });
+    });
   });
 });
